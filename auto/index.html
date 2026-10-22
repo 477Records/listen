@@ -25,7 +25,7 @@
       // Instagram's own scheme: hand the Spotify link to iOS outside the in-app browser.
       'ext': function () { location.replace('instagram://extbrowser/?url=' + encodeURIComponent(web)); },
       // Same, but open our own page in Safari.
-      'ext-page': function () { location.replace('instagram://extbrowser/?url=' + encodeURIComponent('https://geoffreyhufford-boop.github.io/listen/tuesdaynight/?v=7')); },
+      'ext-page': function () { location.replace('instagram://extbrowser/?url=' + encodeURIComponent('https://477records.github.io/listen/tuesdaynight/?v=7')); },
       // iOS 17+ scheme that opens Safari directly.
       'safari': function () { location.href = web.replace(/^https:\/\//, 'x-safari-https://'); },
       // Programmatic click on a target=_blank link (the tap version of this works).
