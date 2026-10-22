@@ -14,25 +14,38 @@
     '#Intent;scheme=https;package=com.spotify.music;S.browser_fallback_url=' +
     encodeURIComponent(web) + ';end';
 
-  // iOS: the web URL is a universal link, so the app opens it when installed and Safari shows the
-  // track page when not. The spotify: scheme errors out on phones without the app.
+  // iOS: the web URL is a universal link. Inside Instagram it only reaches the app when it opens in
+  // a new window (tested Oct 22 2026: same-window navigation stays in the in-app browser, a
+  // target=_blank tap opens Spotify and starts the track). Without the app it shows the web page.
   function appLink() {
     if (isAndroid) return androidIntent;
     return web;
   }
 
-  var opened = false;
-  function open(how) {
-    if (opened && how === 'auto') return;
-    opened = true;
+  function track(how) {
     if (window.fbq) fbq('trackCustom', 'SpotifyOpen', { method: how, inapp: inApp, release: cfg.release });
-    // Give the pixel a moment to send before the page is backgrounded.
-    setTimeout(function () { window.location.href = appLink(); }, 250);
+  }
+
+  function open(how) {
+    track(how);
+    if (isAndroid) {
+      // Give the pixel a moment to send before the page is backgrounded.
+      setTimeout(function () { window.location.href = androidIntent; }, 250);
+    } else {
+      window.open(web, '_blank');
+    }
   }
 
   var btn = document.getElementById('play');
   btn.href = appLink();
-  btn.addEventListener('click', function (e) { e.preventDefault(); opened = false; open('tap'); });
+  if (isAndroid) {
+    btn.addEventListener('click', function (e) { e.preventDefault(); open('tap'); });
+  } else {
+    // A real target=_blank link tap is what Instagram hands to the app; don't intercept it.
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.addEventListener('click', function () { track('tap'); });
+  }
   document.getElementById('web').href = web;
 
   // Auto-open once per visit; coming back to the tab (bfcache) does not fire it again.
