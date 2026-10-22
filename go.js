@@ -31,18 +31,9 @@
     if (isAndroid) {
       // Give the pixel a moment to send before the page is backgrounded.
       setTimeout(function () { window.location.href = androidIntent; }, 250);
-    } else if (isIOS) {
-      // Same as LinkTwin: try the app scheme on load, fall back to the web page if the app
-      // didn't take over (page still visible). Without the app the scheme fails, so the
-      // fallback keeps people out of a dead end.
-      var fallback = setTimeout(function () {
-        if (document.visibilityState !== 'hidden') window.location.href = web;
-      }, 1500);
-      var cancel = function () { if (document.visibilityState === 'hidden') clearTimeout(fallback); };
-      document.addEventListener('visibilitychange', cancel);
-      window.addEventListener('pagehide', function () { clearTimeout(fallback); });
-      setTimeout(function () { window.location.href = 'spotify:track:' + id; }, 250);
     }
+    // iOS: nothing automatic. Instagram blocks app opens that aren't a tap (tested Oct 22 2026, ours
+    // and LinkTwin's both hit "problem loading this website"); the target=_blank tap below works.
   }
 
   // The button and the artwork both open the app.
@@ -65,5 +56,5 @@
   var key = 'opened:' + cfg.release;
   var seen = false;
   try { seen = sessionStorage.getItem(key) === '1'; sessionStorage.setItem(key, '1'); } catch (e) {}
-  if (!seen && (isAndroid || isIOS)) setTimeout(function () { open('auto'); }, 300);
+  if (!seen && isAndroid) setTimeout(function () { open('auto'); }, 300);
 })();
