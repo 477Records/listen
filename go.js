@@ -31,8 +31,17 @@
     if (isAndroid) {
       // Give the pixel a moment to send before the page is backgrounded.
       setTimeout(function () { window.location.href = androidIntent; }, 250);
-    } else {
-      window.open(web, '_blank');
+    } else if (isIOS) {
+      // Same as LinkTwin: try the app scheme on load, fall back to the web page if the app
+      // didn't take over (page still visible). Without the app the scheme fails, so the
+      // fallback keeps people out of a dead end.
+      var fallback = setTimeout(function () {
+        if (document.visibilityState !== 'hidden') window.location.href = web;
+      }, 1500);
+      var cancel = function () { if (document.visibilityState === 'hidden') clearTimeout(fallback); };
+      document.addEventListener('visibilitychange', cancel);
+      window.addEventListener('pagehide', function () { clearTimeout(fallback); });
+      setTimeout(function () { window.location.href = 'spotify:track:' + id; }, 250);
     }
   }
 
@@ -56,5 +65,5 @@
   var key = 'opened:' + cfg.release;
   var seen = false;
   try { seen = sessionStorage.getItem(key) === '1'; sessionStorage.setItem(key, '1'); } catch (e) {}
-  if (!seen && (isAndroid || isIOS)) setTimeout(function () { open('auto'); }, 400);
+  if (!seen && (isAndroid || isIOS)) setTimeout(function () { open('auto'); }, 300);
 })();
