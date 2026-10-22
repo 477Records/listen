@@ -36,16 +36,20 @@
     }
   }
 
-  var btn = document.getElementById('play');
-  btn.href = appLink();
-  if (isAndroid) {
-    btn.addEventListener('click', function (e) { e.preventDefault(); open('tap'); });
-  } else {
-    // A real target=_blank link tap is what Instagram hands to the app; don't intercept it.
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-    btn.addEventListener('click', function () { track('tap'); });
-  }
+  // The button and the artwork both open the app.
+  ['play', 'art'].forEach(function (elId) {
+    var el = document.getElementById(elId);
+    if (!el) return;
+    el.href = appLink();
+    if (isAndroid) {
+      el.addEventListener('click', function (e) { e.preventDefault(); open('tap'); });
+    } else {
+      // A real target=_blank link tap is what Instagram hands to the app; don't intercept it.
+      el.target = '_blank';
+      el.rel = 'noopener';
+      el.addEventListener('click', function () { track('tap'); });
+    }
+  });
   document.getElementById('web').href = web;
 
   // Auto-open once per visit; coming back to the tab (bfcache) does not fire it again.
