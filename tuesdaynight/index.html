@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>tuesdaynight. · Brothel</title>
+<meta name="description" content="Listen to tuesdaynight. by Brothel on Spotify.">
+<meta property="og:title" content="tuesdaynight. · Brothel">
+<meta property="og:description" content="Out now on Spotify.">
+<meta property="og:image" content="https://geoffreyhufford-boop.github.io/listen/tuesdaynight/art.jpg">
+<meta property="og:type" content="music.song">
+<meta name="theme-color" content="#0b1420">
+<style>
+  :root { --bg:#0b1420; --fg:#f4f6f8; --muted:#9fb0c2; --accent:#1ed760; }
+  * { box-sizing:border-box; margin:0; }
+  html, body { height:100%; }
+  body { background:var(--bg); color:var(--fg); font:16px/1.4 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+         display:flex; align-items:center; justify-content:center; padding:24px 16px; overflow-x:hidden; }
+  .bg { position:fixed; inset:-40px; background:url(art.jpg) center/cover; filter:blur(40px) brightness(.45); z-index:-1; }
+  main { width:100%; max-width:360px; text-align:center; }
+  img { width:100%; aspect-ratio:1; border-radius:6px; box-shadow:0 20px 60px rgba(0,0,0,.5); display:block; }
+  h1 { font-size:22px; font-weight:700; margin-top:20px; letter-spacing:-.01em; }
+  p.artist { color:var(--muted); margin-top:2px; }
+  a.play { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:24px; padding:16px; border-radius:999px;
+           background:var(--accent); color:#0b1420; font-weight:700; font-size:17px; text-decoration:none; }
+  a.play svg { width:22px; height:22px; }
+  a.web { display:inline-block; margin-top:16px; color:var(--muted); font-size:14px; }
+</style>
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+  s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2151286498933317');
+  fbq('track', 'PageView');
+</script>
+</head>
+<body data-track="7LQFWpDisREjedOTGLhLpX" data-release="tuesdaynight">
+  <div class="bg"></div>
+  <main>
+    <img src="art.jpg" alt="tuesdaynight. cover art" width="720" height="720">
+    <h1>tuesdaynight.</h1>
+    <p class="artist">Brothel</p>
+    <a id="play" class="play" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      Play on Spotify
+    </a>
+    <a id="web" class="web" href="#">Open in browser instead</a>
+  </main>
+  <script src="../go.js"></script>
+</body>
+</html>
