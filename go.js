@@ -4,7 +4,6 @@
   var cfg = document.body.dataset;
   var id = cfg.track;
   var web = 'https://open.spotify.com/track/' + id;
-  var uri = 'spotify:track:' + id;
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
   var isIOS = /iPhone|iPad|iPod/i.test(ua);
@@ -15,9 +14,10 @@
     '#Intent;scheme=https;package=com.spotify.music;S.browser_fallback_url=' +
     encodeURIComponent(web) + ';end';
 
+  // iOS: the web URL is a universal link, so the app opens it when installed and Safari shows the
+  // track page when not. The spotify: scheme errors out on phones without the app.
   function appLink() {
     if (isAndroid) return androidIntent;
-    if (isIOS) return uri;
     return web;
   }
 
