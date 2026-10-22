@@ -7,6 +7,7 @@
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
   var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isInstagram = /Instagram/i.test(ua);
   var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|Bytedance|Snapchat/i.test(ua);
 
   // Android: intent URL lands in the Spotify app, falls back to the web player if it isn't installed.
@@ -31,9 +32,13 @@
     if (isAndroid) {
       // Give the pixel a moment to send before the page is backgrounded.
       setTimeout(function () { window.location.href = androidIntent; }, 250);
+    } else if (isIOS && isInstagram) {
+      // Instagram's own scheme hands the link to iOS outside the in-app browser, which opens the
+      // Spotify app (Instagram shows an "allow" prompt first). Tested Oct 22 2026; without the
+      // app iOS opens the web page instead. A plain spotify: navigation errors here (LinkTwin too).
+      window.location.replace('instagram://extbrowser/?url=' + encodeURIComponent(web));
     }
-    // iOS: nothing automatic. Instagram blocks app opens that aren't a tap (tested Oct 22 2026, ours
-    // and LinkTwin's both hit "problem loading this website"); the target=_blank tap below works.
+    // Other iOS in-app browsers: nothing automatic; the target=_blank tap below works.
   }
 
   // The button and the artwork both open the app.
@@ -56,5 +61,5 @@
   var key = 'opened:' + cfg.release;
   var seen = false;
   try { seen = sessionStorage.getItem(key) === '1'; sessionStorage.setItem(key, '1'); } catch (e) {}
-  if (!seen && isAndroid) setTimeout(function () { open('auto'); }, 300);
+  if (!seen && (isAndroid || (isIOS && isInstagram))) setTimeout(function () { open('auto'); }, 300);
 })();
