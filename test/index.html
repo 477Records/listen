@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>open test</title>
+<style>
+  :root { --bg:#0b1420; --fg:#f4f6f8; --muted:#9fb0c2; --accent:#1ed760; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--fg); font:16px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; padding:24px 16px; }
+  h1 { font-size:18px; margin-bottom:6px; }
+  p { color:var(--muted); font-size:14px; margin-bottom:18px; }
+  a { display:block; margin:12px 0; padding:16px; border-radius:12px; background:var(--accent); color:var(--bg); font-weight:700; text-decoration:none; }
+  a small { display:block; font-weight:400; font-size:13px; opacity:.75; }
+  #log { color:var(--muted); font:12px ui-monospace, monospace; margin-top:16px; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+  <h1>Spotify open test</h1>
+  <p>Tap one, note what happens, come back to Instagram, tap the next.</p>
+  <a href="spotify:track:7LQFWpDisREjedOTGLhLpX">A<small>Spotify app scheme, direct</small></a>
+  <a href="#" id="b">B<small>Spotify app scheme, hidden frame</small></a>
+  <a href="x-safari-https://open.spotify.com/track/7LQFWpDisREjedOTGLhLpX">C<small>Escape to Safari, Spotify link</small></a>
+  <a href="x-safari-https://geoffreyhufford-boop.github.io/listen/tuesdaynight/?v=4">D<small>Escape to Safari, our page</small></a>
+  <a href="https://open.spotify.com/track/7LQFWpDisREjedOTGLhLpX" target="_blank">E<small>Spotify link, new window</small></a>
+  <div id="log"></div>
+  <script>
+    document.getElementById('log').textContent = navigator.userAgent;
+    document.getElementById('b').addEventListener('click', function (e) {
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.style.display = 'none';
+      f.src = 'spotify:track:7LQFWpDisREjedOTGLhLpX';
+      document.body.appendChild(f);
+    });
+  </script>
+</body>
+</html>
