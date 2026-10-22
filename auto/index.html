@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>auto open test</title>
+<style>
+  :root { --bg:#0b1420; --fg:#f4f6f8; --muted:#9fb0c2; }
+  body { background:var(--bg); color:var(--fg); font:16px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif; padding:24px 16px; margin:0; }
+  p { color:var(--muted); font-size:14px; }
+  #log { font:12px ui-monospace, monospace; white-space:pre-wrap; margin-top:16px; color:var(--muted); }
+</style>
+</head>
+<body>
+  <h1 id="h">Auto open test</h1>
+  <p>This page tries to open Spotify by itself. Note what happens.</p>
+  <div id="log"></div>
+  <script>
+    // One method per ?m= value, each fired automatically on load with no tap.
+    var web = 'https://open.spotify.com/track/7LQFWpDisREjedOTGLhLpX';
+    var m = (location.search.match(/[?&]m=([a-z0-9-]+)/) || [])[1] || '';
+    document.getElementById('h').textContent = 'Auto open test: ' + (m || 'none');
+    var methods = {
+      // Instagram's own scheme: hand the Spotify link to iOS outside the in-app browser.
+      'ext': function () { location.replace('instagram://extbrowser/?url=' + encodeURIComponent(web)); },
+      // Same, but open our own page in Safari.
+      'ext-page': function () { location.replace('instagram://extbrowser/?url=' + encodeURIComponent('https://geoffreyhufford-boop.github.io/listen/tuesdaynight/?v=7')); },
+      // iOS 17+ scheme that opens Safari directly.
+      'safari': function () { location.href = web.replace(/^https:\/\//, 'x-safari-https://'); },
+      // Programmatic click on a target=_blank link (the tap version of this works).
+      'click': function () { var a = document.createElement('a'); a.href = web; a.target = '_blank'; document.body.appendChild(a); a.click(); }
+    };
+    document.getElementById('log').textContent = navigator.userAgent;
+    if (methods[m]) setTimeout(methods[m], 300);
+  </script>
+</body>
+</html>
