@@ -23,8 +23,25 @@
     return web;
   }
 
+  // Pixel events, each at most once per page load:
+  //   SpotifyOpen   - first attempt to open the app (method: auto or tap).
+  //   SpotifyLeft   - the page went to the background within 8s of an attempt, i.e. the person
+  //                   actually left for Spotify (allowed the Instagram prompt, or the app opened).
+  var attempted = false, left = false, attemptAt = 0;
+  function send(name, how) {
+    if (window.fbq) fbq('trackCustom', name, { method: how, inapp: inApp, release: cfg.release });
+  }
   function track(how) {
-    if (window.fbq) fbq('trackCustom', 'SpotifyOpen', { method: how, inapp: inApp, release: cfg.release });
+    attemptAt = Date.now();
+    if (attempted) return;
+    attempted = true;
+    send('SpotifyOpen', how);
+    var firstHow = how;
+    document.addEventListener('visibilitychange', function () {
+      if (left || document.visibilityState !== 'hidden' || Date.now() - attemptAt > 8000) return;
+      left = true;
+      send('SpotifyLeft', firstHow);
+    });
   }
 
   function open(how) {
