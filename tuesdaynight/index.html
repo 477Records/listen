@@ -24,6 +24,7 @@
   a.play { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:24px; padding:16px; border-radius:999px;
            background:var(--accent); color:#0b1420; font-weight:700; font-size:17px; text-decoration:none; }
   a.play svg { width:22px; height:22px; }
+  p.hint { color:var(--fg); font-size:14px; margin-top:12px; opacity:.85; }
   a.web { display:inline-block; margin-top:16px; color:var(--muted); font-size:14px; }
 </style>
 <script>
@@ -44,6 +45,7 @@
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       Play on Spotify
     </a>
+    <p class="hint">Like it? Tap ♡ in Spotify to save it.</p>
     <a id="web" class="web" href="#">Open in browser instead</a>
   </main>
   <script src="../go.js?v=10"></script>
