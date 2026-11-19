@@ -26,6 +26,10 @@
   a.play svg { width:22px; height:22px; }
   p.hint { color:var(--fg); font-size:14px; margin-top:12px; opacity:.85; }
   a.web { display:inline-block; margin-top:16px; color:var(--muted); font-size:14px; }
+  p.also { margin-top:26px; color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+  a.store { display:block; margin-top:10px; padding:13px; border-radius:999px; border:1px solid rgba(244,246,248,.28);
+            color:var(--fg); font-weight:600; font-size:15px; text-decoration:none; }
+  a.store:active { background:rgba(244,246,248,.08); }
   p.legal { margin-top:28px; font-size:11px; color:var(--muted); opacity:.7; }
   p.legal a { color:inherit; }
 </style>
@@ -49,8 +53,20 @@
     </a>
     <p class="hint">Like it? Tap ♡ in Spotify to save it.</p>
     <a id="web" class="web" href="#">Open in browser instead</a>
+    <p class="also">Also on</p>
+    <a class="store" data-store="apple" href="https://geo.music.apple.com/us/album/mutual-destruction-single/6818283326" target="_blank" rel="noopener">Apple Music</a>
+    <a class="store" data-store="youtube" href="https://music.youtube.com/search?q=Brothel%20Divine%20mutual%20destruction." target="_blank" rel="noopener">YouTube Music</a>
+    <a class="store" data-store="amazon" href="https://music.amazon.com/search/Brothel%20Divine%20mutual%20destruction" target="_blank" rel="noopener">Amazon Music</a>
     <p class="legal">This page uses cookies and the Meta pixel to measure ads. <a href="https://chiseled-bridge-510.notion.site/477-privacy-policy-3dfcd346169080349848d2c3b082f198" target="_blank" rel="noopener">Privacy</a></p>
   </main>
   <script src="../go.js?v=10"></script>
+  <script>
+    // Other stores: plain links, counted separately from the Spotify events in go.js.
+    [].forEach.call(document.querySelectorAll('a.store'), function (a) {
+      a.addEventListener('click', function () {
+        if (window.fbq) fbq('trackCustom', 'StoreClick', { store: a.dataset.store, release: document.body.dataset.release });
+      });
+    });
+  </script>
 </body>
 </html>
