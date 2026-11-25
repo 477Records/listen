@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>On The Block · WNTRBRK</title>
+<meta name="description" content="Listen to On The Block by WNTRBRK on Spotify.">
+<meta property="og:title" content="On The Block · WNTRBRK">
+<meta property="og:description" content="Out now on Spotify.">
+<meta property="og:image" content="https://477records.github.io/listen/ontheblock/art.jpg">
+<meta property="og:type" content="music.song">
+<meta name="theme-color" content="#131212">
+<style>
+  :root { --bg:#131212; --fg:#f4f6f8; --muted:#9fb0c2; --accent:#1ed760; }
+  * { box-sizing:border-box; margin:0; }
+  html, body { height:100%; }
+  body { background:var(--bg); color:var(--fg); font:16px/1.4 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+         display:flex; align-items:center; justify-content:center; padding:24px 16px; overflow-x:hidden; }
+  .bg { position:fixed; inset:-40px; background:url(art.jpg) center/cover; filter:blur(40px) brightness(.45); z-index:-1; }
+  main { width:100%; max-width:360px; text-align:center; }
+  img { width:100%; height:auto; aspect-ratio:1; object-fit:cover; border-radius:6px; box-shadow:0 20px 60px rgba(0,0,0,.5); display:block; }
+  h1 { font-size:22px; font-weight:700; margin-top:20px; letter-spacing:-.01em; }
+  p.artist { color:var(--muted); margin-top:2px; }
+  a.play { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:24px; padding:16px; border-radius:999px;
+           background:var(--accent); color:#131212; font-weight:700; font-size:17px; text-decoration:none; }
+  a.play svg { width:22px; height:22px; }
+  p.hint { color:var(--fg); font-size:14px; margin-top:12px; opacity:.85; }
+  a.web { display:inline-block; margin-top:16px; color:var(--muted); font-size:14px; }
+  p.also { margin-top:26px; color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+  a.store { display:block; margin-top:10px; padding:13px; border-radius:999px; border:1px solid rgba(244,246,248,.28);
+            color:var(--fg); font-weight:600; font-size:15px; text-decoration:none; }
+  a.store:active { background:rgba(244,246,248,.08); }
+  p.legal { margin-top:28px; font-size:11px; color:var(--muted); opacity:.7; }
+  p.legal a { color:inherit; }
+</style>
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+  s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2151286498933317');
+  fbq('track', 'PageView');
+</script>
+</head>
+<body data-track="1yfmzQKwCTYSlP7ewAdbCU" data-release="ontheblock">
+  <div class="bg"></div>
+  <main>
+    <a id="art" href="#"><img src="art.jpg" alt="On The Block cover art" width="720" height="720"></a>
+    <h1>On The Block</h1>
+    <p class="artist">WNTRBRK</p>
+    <a id="play" class="play" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      Play on Spotify
+    </a>
+    <p class="hint">Like it? Tap ♡ in Spotify to save it.</p>
+    <a id="web" class="web" href="#">Open in browser instead</a>
+    <p class="also">Also on</p>
+    <a class="store" data-store="apple" href="https://geo.music.apple.com/us/album/on-the-block-single/6808036597" target="_blank" rel="noopener">Apple Music</a>
+    <a class="store" data-store="youtube" href="https://music.youtube.com/search?q=WNTRBRK%20On%20The%20Block" target="_blank" rel="noopener">YouTube Music</a>
+    <a class="store" data-store="amazon" href="https://music.amazon.com/search/WNTRBRK%20On%20The%20Block" target="_blank" rel="noopener">Amazon Music</a>
+    <p class="legal">This page uses cookies and the Meta pixel to measure ads. <a href="https://www.477records.com/privacy.html" target="_blank" rel="noopener">Privacy</a></p>
+  </main>
+  <script src="../go.js?v=10"></script>
+  <script>
+    // Other stores: plain links, counted separately from the Spotify events in go.js.
+    [].forEach.call(document.querySelectorAll('a.store'), function (a) {
+      a.addEventListener('click', function () {
+        if (window.fbq) fbq('trackCustom', 'StoreClick', { store: a.dataset.store, release: document.body.dataset.release });
+      });
+    });
+  </script>
+</body>
+</html>
